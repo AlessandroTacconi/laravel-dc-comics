@@ -2,7 +2,7 @@
 <body>
 @section('main')
 
-
+<h3><p class="card-text"><a href="{{ Route('comics.create') }}">Crea un fumetto</a></p></h3>
  
 <div class="row">
 @foreach ($comics as $comic_item)
