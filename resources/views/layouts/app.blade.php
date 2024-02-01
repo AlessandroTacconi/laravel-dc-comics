@@ -9,7 +9,9 @@
 </head>
 @include('shared.header')
   <main>
-    @yield('main')
+    <div class="container">
+      @yield('main')
+    </div>
   </main>
 @include('shared.footer')
 </body>
