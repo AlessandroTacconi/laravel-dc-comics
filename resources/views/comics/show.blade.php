@@ -12,7 +12,9 @@
     <p class="card-text">{{ $comic->price }}</p>
     {{-- <p class="card-text">{{ $comic_item->id }}</p> --}}
         <p class="card-text"><a href="{{ Route('comics.edit', $comic->id) }}">Modifica</a></p>
-    <p class="card-text"><a href="{{ Route('comics.index', $comic->id) }}">Torna alla lista</a></p>
+
+        </form>
+    <p class="card-text"><a href="{{ Route('comics.index', $comic->id) }} me">Torna alla lista</a></p>
 </div>
 
 
