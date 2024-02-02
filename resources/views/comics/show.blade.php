@@ -11,6 +11,7 @@
     <h5 class="card-title">{{ $comic->title }}</h5>
     <p class="card-text">{{ $comic->price }}</p>
     {{-- <p class="card-text">{{ $comic_item->id }}</p> --}}
+        <p class="card-text"><a href="{{ Route('comics.edit', $comic->id) }}">Modifica</a></p>
     <p class="card-text"><a href="{{ Route('comics.index', $comic->id) }}">Torna alla lista</a></p>
 </div>
 
