@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Comic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class ComicController extends Controller
 {
@@ -30,7 +32,17 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+
+    //         $request->validate([
+    //         'title' => 'required|unique:comics|max:75',
+    //         'thumb' => 'max:75|ends_with:jpg,png',
+    //         'price' => 'required|max:10',
+    // ]);
+
         $data = $request->all();
+
+$form_data = $this->validation($request->all());
+
         $comic = new Comic();
 
         $comic->title = $data['title'];
@@ -47,7 +59,7 @@ class ComicController extends Controller
     public function show(Comic $comic)
     {
 
-        return view('comics.show', compact('comic'));
+        return view('comics.show', compact('comic')); 
     }
 
     /**
@@ -65,6 +77,8 @@ class ComicController extends Controller
     public function update(Request $request, Comic $comic)
     {
         $data = $request->all();
+$form_data = $this->validation($request->all());
+
         $comic->update($data);
         return redirect()->route('comics.show', $comic->id);
     }
@@ -77,4 +91,26 @@ class ComicController extends Controller
         $comic->delete();
         return redirect()->route('comics.index');
     }
+
+
+private function validation($data)
+{
+    $validator = Validator::make($data, [
+            'title' => 'required|unique:comics|max:75',
+            'thumb' => 'max:75',
+            'price' => 'required|max:10',
+    ], [
+        'title.required' => 'Il titolo è obbligatorio',
+        'title.unique' => 'Il titolo è già presente',
+        'title.max' => 'Il titolo può avere massimo :max caratteri',
+        'thumb.max' => 'immagine non valida',
+        'price.required' => 'Il prezzo è obbligatorio',
+        'price.max' => 'Il prezzo può avere massimo :max caratteri',
+    ])->validate();
+
+    return $validator;
 }
+}
+
+
+
